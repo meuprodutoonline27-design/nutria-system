@@ -83,7 +83,7 @@ function aplicarTema() {
     const nome = document.getElementById('nomeProfissional')?.value?.trim() || 'NutriIA';
     const cor = document.getElementById('corTema')?.value || '#16a34a';
     const header = document.getElementById('appHeader');
-    const title = document.getElementById('appTitle');
+    const title = document.getElementById('appTitleName');
     const toggle = document.getElementById('themeToggle');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     const modoEscuro = localStorage.getItem('themeMode') === 'dark';
@@ -100,7 +100,7 @@ function aplicarTema() {
     }
 
     if (title) {
-        title.innerHTML = `<i class="fas fa-leaf mr-2"></i>${nome}`;
+        title.textContent = nome;
     }
 
     if (toggle) {

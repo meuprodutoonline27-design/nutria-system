@@ -6,11 +6,65 @@
     <title>NutriIA - Cardápio Inteligente</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#16a34a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { transition: background-color .2s ease, color .2s ease; }
-        body.theme-dark { background-color: #020617; color: #e2e8f0; }
+        :root {
+            --brand: #16a34a;
+            --ink: #17211b;
+            --muted: #6b7a70;
+            --canvas: #f4f8f5;
+            --line: #dce8df;
+            --glass: rgba(255, 255, 255, .72);
+            --shadow: 0 18px 45px rgba(29, 77, 51, .08);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background: radial-gradient(circle at 0 0, #e5f5e9 0, transparent 32%), var(--canvas);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0;
+            transition: background-color .25s ease, color .25s ease;
+        }
+        main { padding-top: 2rem !important; }
+        #appHeader {
+            background: color-mix(in srgb, var(--brand) 82%, #0b2415 18%) !important;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, .2);
+            box-shadow: 0 10px 30px rgba(10, 62, 31, .14);
+        }
+        #appTitle { letter-spacing: -.03em; }
+        #appSubtitle { color: rgba(255, 255, 255, .72); }
+        #formSection, #historicoSection, #results > section {
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+        input:not([type="checkbox"]):not([type="color"]), select {
+            min-height: 3rem;
+            border-color: var(--line) !important;
+            background: rgba(255, 255, 255, .82);
+            transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, transform .2s ease;
+        }
+        input:not([type="checkbox"]):not([type="color"]):focus, select:focus {
+            border-color: var(--brand) !important;
+            background: #fff;
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent), 0 8px 22px rgba(22, 163, 74, .1);
+            transform: translateY(-1px);
+        }
+        button { transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; }
+        button:hover { transform: translateY(-1px); }
+        button:active { transform: translateY(0) scale(.98); }
+        #dietForm { gap: 1.25rem; }
+        #dietForm label { color: var(--muted); letter-spacing: .01em; }
+        #appHeader + main section { animation: rise-in .45s ease both; }
+        @keyframes rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        body.theme-dark { background: #07110b; color: #e2e8f0; }
         body.theme-dark #formSection,
         body.theme-dark #historicoSection,
         body.theme-dark .theme-card,
@@ -29,6 +83,8 @@
             background-color: #1f2937;
             color: #f8fafc;
         }
+        body.theme-dark input:not([type="checkbox"]):not([type="color"]),
+        body.theme-dark select { background: #0f172a; }
         @media print {
             body { background: white !important; }
             header, .no-print, #formSection, #historicoSection, #loading { display: none !important; }
@@ -41,8 +97,11 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
 
     <!-- Cabeçalho -->
-    <header id="appHeader" class="bg-green-600 text-white p-4 shadow-md sticky top-0 z-50 relative">
-        <h1 id="appTitle" class="text-xl font-bold text-center"><i class="fas fa-leaf mr-2"></i>NutriIA</h1>
+    <header id="appHeader" class="text-white px-5 py-4 sticky top-0 z-50 relative">
+        <div class="text-center pr-10">
+            <h1 id="appTitle" class="text-xl font-bold"><i class="fas fa-leaf mr-2"></i><span id="appTitleName">NutriIA</span></h1>
+            <p id="appSubtitle" class="text-[10px] font-medium uppercase tracking-[0.18em] mt-1">Seu espaço de nutrição</p>
+        </div>
         <button id="themeToggle" type="button" class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-white/10 px-3 py-2 text-sm" aria-pressed="false" title="Alternar tema">
             <i class="fas fa-moon"></i>
         </button>
@@ -52,11 +111,16 @@
         
         <!-- Formulário -->
         <section id="formSection" class="bg-white p-5 rounded-2xl shadow-sm mb-6 theme-card" data-theme-surface>
-            <h2 class="text-lg font-semibold mb-4 text-green-700">Seus Dados</h2>
+            <div class="mb-6">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-green-600 mb-2">Configuração inicial</p>
+                <h2 class="text-2xl font-bold tracking-tight text-gray-900">Vamos personalizar seu plano</h2>
+                <p class="text-sm text-gray-500 mt-2 leading-relaxed">Defina sua marca e seus dados. O restante fica por nossa conta.</p>
+            </div>
             <form id="dietForm" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-medium text-gray-600 mb-1">Nome do Profissional</label>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Nome que aparece no seu app</label>
                     <input type="text" id="nomeProfissional" placeholder="Ex: Dra. Ana Lima" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                    <p class="text-xs text-gray-400 mt-2">Sua marca será exibida no topo para seus pacientes.</p>
                 </div>
 
                 <div>
