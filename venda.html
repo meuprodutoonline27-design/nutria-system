@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0e6b3d">
+    <title>NutriIA | Seu consultório, mais inteligente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --green: #0e6b3d; --deep: #092d20; --lime: #b7e27d; --paper: #f5f7f1; --ink: #163328; --muted: #698077; --line: #dce8de; }
+        * { box-sizing: border-box; }
+        body { margin: 0; color: var(--ink); background: var(--paper); font-family: 'DM Sans', sans-serif; }
+        a { color: inherit; text-decoration: none; }
+        .nav { display: flex; align-items: center; justify-content: space-between; max-width: 1180px; margin: auto; padding: 24px 28px; }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.04em; font-size: 20px; }
+        .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; color: var(--deep); background: var(--lime); }
+        .nav-link { color: #d4e8da; font-size: 14px; }
+        .hero { overflow: hidden; color: white; background: linear-gradient(135deg, #0a3425 0%, #0e6b3d 58%, #39895a 100%); }
+        .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 70px; max-width: 1180px; min-height: 650px; margin: auto; padding: 48px 28px 86px; }
+        .eyebrow { color: var(--lime); font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+        h1, h2 { font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: -.045em; line-height: 1.02; }
+        h1 { max-width: 650px; margin: 22px 0; font-size: clamp(46px, 6vw, 76px); }
+        .hero-copy { max-width: 540px; color: #d7ebdc; font-size: 18px; line-height: 1.65; }
+        .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+        .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border-radius: 12px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease; }
+        .button:hover { transform: translateY(-2px); box-shadow: 0 14px 24px rgba(0,0,0,.16); }
+        .button-primary { color: var(--deep); background: var(--lime); }
+        .button-ghost { color: white; border: 1px solid rgba(255,255,255,.35); }
+        .proof { display: flex; gap: 24px; margin-top: 30px; color: #b9d5c1; font-size: 13px; }
+        .preview { position: relative; transform: rotate(2deg); padding: 13px; border: 1px solid rgba(255,255,255,.35); border-radius: 24px; background: rgba(255,255,255,.12); box-shadow: 0 30px 70px rgba(0,0,0,.24); backdrop-filter: blur(14px); }
+        .phone { overflow: hidden; border-radius: 16px; background: #f8fbf7; color: var(--ink); }
+        .phone-top { padding: 22px 20px 28px; color: white; background: linear-gradient(145deg, #167b49, #0c4f32); }
+        .phone-top small { color: #bfe4c9; }
+        .phone-top h3 { margin: 12px 0 0; font-family: 'Playfair Display', serif; font-size: 30px; }
+        .phone-body { padding: 18px; }
+        .metric { display: flex; justify-content: space-between; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: white; font-size: 13px; }
+        .metric strong { color: var(--green); }
+        .meal { margin-top: 12px; padding: 15px; border-radius: 12px; background: #eaf5e9; }
+        .meal b { display: block; margin-bottom: 5px; color: var(--green); font-size: 13px; }
+        .meal span { color: #587167; font-size: 13px; }
+        .section { max-width: 1180px; margin: auto; padding: 92px 28px; }
+        .section-heading { max-width: 620px; margin-bottom: 42px; }
+        h2 { margin: 14px 0; font-size: clamp(36px, 5vw, 56px); }
+        .section-heading p { color: var(--muted); font-size: 17px; line-height: 1.6; }
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .feature { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.65); }
+        .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 26px; border-radius: 12px; color: var(--deep); background: var(--lime); font-size: 20px; }
+        .feature h3 { margin: 0 0 10px; font-size: 19px; }
+        .feature p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+        .cta { max-width: 1180px; margin: 0 auto 72px; padding: 58px 56px; border-radius: 22px; color: white; background: var(--deep); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+        .cta h2 { max-width: 600px; margin: 0; }
+        footer { max-width: 1180px; margin: auto; padding: 0 28px 32px; color: var(--muted); font-size: 13px; }
+        @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .preview { max-width: 460px; margin: auto; } .features { grid-template-columns: 1fr; } .cta { align-items: flex-start; flex-direction: column; margin: 0 18px 52px; padding: 38px 26px; } }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="venda.html"><span class="brand-mark">✦</span> NutriIA</a>
+            <a class="nav-link" href="index.html">Acessar o app →</a>
+        </nav>
+        <div class="hero-grid">
+            <div>
+                <div class="eyebrow">A experiência do seu consultório</div>
+                <h1>Planos que carregam a sua marca.</h1>
+                <p class="hero-copy">Crie cardápios personalizados em poucos minutos, compartilhe pelo WhatsApp e entregue aos seus pacientes uma experiência que parece feita sob medida.</p>
+                <div class="actions"><a class="button button-primary" href="index.html">Começar agora</a><a class="button button-ghost" href="#recursos">Conhecer recursos</a></div>
+                <div class="proof"><span>✓ White label nativo</span><span>✓ Funciona no celular</span></div>
+            </div>
+            <div class="preview" aria-label="Prévia do aplicativo NutriIA">
+                <div class="phone">
+                    <div class="phone-top"><small>SEU ESPAÇO DE NUTRIÇÃO</small><h3>Dra. Ana Lima</h3></div>
+                    <div class="phone-body"><div class="metric"><span>Meta estimada</span><strong>1.850 kcal/dia</strong></div><div class="meal"><b>SEGUNDA • CAFÉ DA MANHÃ</b><span>Iogurte natural, aveia e frutas vermelhas</span></div><div class="meal"><b>LISTA DE COMPRAS</b><span>7 itens organizados para a semana</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main id="recursos" class="section">
+        <div class="section-heading"><div class="eyebrow" style="color: var(--green)">Mais tempo para cuidar</div><h2>O sistema trabalha no ritmo do seu atendimento.</h2><p>Uma ferramenta direta, elegante e pronta para o dia a dia de profissionais que querem entregar mais valor sem aumentar a operação.</p></div>
+        <div class="features">
+            <article class="feature"><div class="feature-icon">✦</div><h3>Sua marca no topo</h3><p>Troque “NutriIA” pelo seu nome, ajuste a cor do tema e transforme o sistema em uma extensão do seu consultório.</p></article>
+            <article class="feature"><div class="feature-icon">↗</div><h3>Compartilhe em um toque</h3><p>O cardápio vira uma mensagem organizada no WhatsApp, pronta para chegar ao paciente com clareza.</p></article>
+            <article class="feature"><div class="feature-icon">⌁</div><h3>Histórico sempre à mão</h3><p>Planos salvos, funcionamento offline e uma experiência simples para retomar o atendimento de onde parou.</p></article>
+        </div>
+    </main>
+    <section class="cta"><h2>Seu método merece uma experiência à altura.</h2><a class="button button-primary" href="index.html">Testar o NutriIA</a></section>
+    <footer>NutriIA · Cardápios inteligentes para profissionais de nutrição</footer>
+</body>
+</html>

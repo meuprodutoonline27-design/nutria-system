@@ -15,6 +15,12 @@ function calcularTmb(dados) {
 
 let dietaAtualExportavel = null;
 
+function obterNomeProfissional() {
+    return document.getElementById('nomeProfissional')?.value?.trim()
+        || JSON.parse(localStorage.getItem('dadosFormulario') || '{}').nomeProfissional
+        || 'NutriIA';
+}
+
 function definirDietaAtual(dieta) {
     dietaAtualExportavel = dieta;
     if (dieta) {
@@ -261,6 +267,7 @@ document.getElementById('dietForm').addEventListener('submit', async (e) => {
     
     const restricoes = Array.from(document.querySelectorAll('.restricao:checked')).map(cb => cb.value).join(', ');
     const dados = {
+        nomeProfissional: document.getElementById('nomeProfissional').value.trim(),
         peso: document.getElementById('peso').value,
         altura: document.getElementById('altura').value,
         idade: document.getElementById('idade').value,
@@ -350,9 +357,15 @@ function montarTextoWhatsApp() {
         return null;
     }
 
+    const dadosSalvos = JSON.parse(localStorage.getItem('dadosFormulario') || '{}');
+    const nomeProfissional = dieta.nomeProfissional || dadosSalvos.nomeProfissional || obterNomeProfissional();
+    const objetivo = dieta.objetivo || dadosSalvos.objetivo || 'Não informado';
+    const orcamento = dieta.orcamento || dadosSalvos.orcamento || 'Não informado';
     const linhas = [];
-    linhas.push('🍽️ Cardápio semanal NutriIA');
-    linhas.push(`📌 Objetivo: ${dieta.objetivo || 'Não informado'}`);
+    linhas.push(`🍽️ *Cardápio semanal - ${nomeProfissional}*`);
+    linhas.push('');
+    linhas.push('Seu plano personalizado está pronto:');
+    linhas.push(`📌 Objetivo: ${objetivo}`);
     linhas.push(`🔥 TMB estimada: ${dieta.tmb ? `${dieta.tmb} kcal/dia` : 'Não informada'}`);
     const meta = calcularMetaCalorica({
         peso: dieta.peso,
@@ -363,11 +376,11 @@ function montarTextoWhatsApp() {
     if (meta) {
         linhas.push(`🎯 Meta estimada: ${meta} kcal/dia`);
     }
-    linhas.push(`💸 Orçamento: R$ ${dieta.orcamento || 'Não informado'}`);
+    linhas.push(`💸 Orçamento: R$ ${orcamento}`);
     linhas.push('');
 
     dieta.cardapio.forEach(dia => {
-        linhas.push(`📅 ${dia.dia}`);
+        linhas.push(`*📅 ${dia.dia}*`);
         linhas.push(`☕ Café: ${dia.cafe}`);
         linhas.push(`🍽️ Almoço: ${dia.almoco}`);
         linhas.push(`🍎 Lanche: ${dia.lanche}`);
@@ -375,13 +388,15 @@ function montarTextoWhatsApp() {
         linhas.push('');
     });
 
-    linhas.push('🛒 Lista de compras');
+    linhas.push('*🛒 Lista de compras*');
     Object.entries(dieta.lista_compras || {}).forEach(([secao, itens]) => {
         if (Array.isArray(itens) && itens.length > 0) {
-            linhas.push(`• ${secao}: ${itens.join(', ')}`);
+            linhas.push(`• *${secao}:* ${itens.join(', ')}`);
         }
     });
 
+    linhas.push('');
+    linhas.push('Bom planejamento e bom apetite!');
     return linhas.join('\n');
 }
 
