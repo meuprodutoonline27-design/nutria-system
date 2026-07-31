@@ -49,6 +49,38 @@
         .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 26px; border-radius: 12px; color: var(--deep); background: var(--lime); font-size: 20px; }
         .feature h3 { margin: 0 0 10px; font-size: 19px; }
         .feature p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+        .section-alt { background: #eaf2e9; }
+        .steps-grid, .audience-grid, .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .step-card, .audience-card, .trust-card { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.72); }
+        .step-number { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 22px; border-radius: 50%; color: var(--deep); background: var(--lime); font-weight: 700; }
+        .step-card h3, .audience-card h3, .trust-card h3 { margin: 0 0 9px; font-size: 18px; }
+        .step-card p, .audience-card p, .trust-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+        .demo { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; align-items: center; }
+        .demo-panel { padding: 24px; border-radius: 18px; color: white; background: var(--deep); }
+        .demo-panel h3 { margin: 0 0 12px; font-family: 'Playfair Display', serif; font-size: 28px; }
+        .demo-panel p { margin: 0; color: #c8ded0; line-height: 1.6; font-size: 14px; }
+        .demo-list { display: grid; gap: 11px; margin: 22px 0 0; padding: 0; list-style: none; color: #dceee1; font-size: 14px; }
+        .demo-list li::before { content: '→'; margin-right: 9px; color: var(--lime); font-weight: 700; }
+        .screen { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: white; box-shadow: 0 18px 38px rgba(29,77,51,.08); }
+        .screen-bar { display: flex; gap: 6px; margin-bottom: 20px; }
+        .screen-bar span { width: 8px; height: 8px; border-radius: 50%; background: #d9e9dc; }
+        .screen-title { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 16px; }
+        .screen-title strong { font-family: 'Playfair Display', serif; font-size: 24px; }
+        .screen-title small { color: var(--green); font-weight: 700; }
+        .screen-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .screen-item { min-height: 90px; padding: 14px; border-radius: 12px; background: #edf7ed; }
+        .screen-item b { display: block; margin-bottom: 8px; color: var(--green); font-size: 12px; }
+        .screen-item span { color: var(--muted); font-size: 12px; line-height: 1.4; }
+        .faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        details { padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.72); }
+        summary { cursor: pointer; font-weight: 700; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; float: right; color: var(--green); font-size: 20px; line-height: 16px; }
+        details[open] summary::after { content: '−'; }
+        details p { margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+        .source-box { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 30px; border: 1px solid #b9d8bf; border-radius: 18px; background: #e4f3e5; }
+        .source-box h3 { margin: 0 0 8px; font-size: 22px; }
+        .source-box p { max-width: 660px; margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
         .offer { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: stretch; }
         .offer-card { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: white; }
         .offer-card h3 { margin: 0 0 18px; font-size: 22px; }
@@ -63,7 +95,7 @@
         .cta { max-width: 1180px; margin: 0 auto 72px; padding: 58px 56px; border-radius: 22px; color: white; background: var(--deep); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
         .cta h2 { max-width: 600px; margin: 0; }
         footer { max-width: 1180px; margin: auto; padding: 0 28px 32px; color: var(--muted); font-size: 13px; }
-        @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .preview { max-width: 460px; margin: auto; } .features, .offer { grid-template-columns: 1fr; } .cta { align-items: flex-start; flex-direction: column; margin: 0 18px 52px; padding: 38px 26px; } }
+        @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .preview { max-width: 460px; margin: auto; } .features, .offer, .steps-grid, .audience-grid, .trust-grid, .demo, .faq { grid-template-columns: 1fr; } .screen-row { grid-template-columns: 1fr; } .source-box { align-items: flex-start; flex-direction: column; } .cta { align-items: flex-start; flex-direction: column; margin: 0 18px 52px; padding: 38px 26px; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
     </style>
 </head>
@@ -95,6 +127,52 @@
             <article class="feature"><div class="feature-icon">✦</div><h3>Sua marca no topo</h3><p>Troque “NutriIA” pelo seu nome, ajuste a cor do tema e transforme o sistema em uma extensão do seu consultório.</p></article>
             <article class="feature"><div class="feature-icon">↗</div><h3>Compartilhe em um toque</h3><p>O cardápio vira uma mensagem organizada no WhatsApp, pronta para chegar ao paciente com clareza.</p></article>
             <article class="feature"><div class="feature-icon">⌁</div><h3>Histórico sempre à mão</h3><p>Planos salvos, funcionamento offline e uma experiência simples para retomar o atendimento de onde parou.</p></article>
+        </div>
+        <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Demonstração</div><h2>Do dado do paciente ao plano pronto.</h2><p>Uma jornada curta para você gastar menos tempo montando material e mais tempo acompanhando pessoas.</p></div>
+        <div class="demo">
+            <div class="demo-panel"><h3>Em poucos passos</h3><p>O fluxo foi pensado para ser simples desde o primeiro acesso, no celular ou no computador.</p><ul class="demo-list"><li>Personalize seu nome e sua cor</li><li>Informe os dados do paciente</li><li>Gere o cardápio semanal</li><li>Revise e envie pelo WhatsApp</li></ul></div>
+            <div class="screen" aria-label="Demonstração de um cardápio gerado"><div class="screen-bar"><span></span><span></span><span></span></div><div class="screen-title"><strong>Cardápio da semana</strong><small>1.850 kcal/dia</small></div><div class="screen-row"><div class="screen-item"><b>SEGUNDA</b><span>Frutas, aveia e iogurte natural</span></div><div class="screen-item"><b>ALMOÇO</b><span>Arroz, feijão, frango e salada</span></div><div class="screen-item"><b>COMPRAS</b><span>Lista organizada por categoria</span></div></div></div>
+        </div>
+    </main>
+    <section class="section section-alt">
+        <div class="section-heading"><div class="eyebrow" style="color: var(--green)">Benefícios práticos</div><h2>Mais organização em cada atendimento.</h2><p>Recursos pensados para reduzir tarefas repetitivas e deixar sua entrega mais consistente.</p></div>
+        <div class="features">
+            <article class="feature"><div class="feature-icon">01</div><h3>Atendimento mais ágil</h3><p>Tenha uma base de trabalho pronta para personalizar sem começar cada plano do zero.</p></article>
+            <article class="feature"><div class="feature-icon">02</div><h3>Experiência profissional</h3><p>Entregue um material organizado, com a identidade visual do seu consultório.</p></article>
+            <article class="feature"><div class="feature-icon">03</div><h3>Mais clareza para o paciente</h3><p>Refeições e compras reunidas em uma experiência fácil de consultar durante a semana.</p></article>
+            <article class="feature"><div class="feature-icon">04</div><h3>Acesso em qualquer lugar</h3><p>Use pelo navegador no computador ou adicione à tela inicial do celular.</p></article>
+            <article class="feature"><div class="feature-icon">05</div><h3>Continuidade offline</h3><p>O histórico salvo no dispositivo ajuda você a retomar seus planos mesmo sem conexão.</p></article>
+            <article class="feature"><div class="feature-icon">06</div><h3>Você é dono do projeto</h3><p>Receba o código-fonte do sistema para guardar, estudar e evoluir sua solução.</p></article>
+        </div>
+    </section>
+    <main class="section">
+        <div class="section-heading"><div class="eyebrow" style="color: var(--green)">Para quem é indicado</div><h2>Feito para profissionais que querem crescer com método.</h2></div>
+        <div class="audience-grid">
+            <article class="audience-card"><h3>Nutricionistas</h3><p>Para organizar a entrega de cardápios e fortalecer a percepção de valor do atendimento.</p></article>
+            <article class="audience-card"><h3>Consultórios e clínicas</h3><p>Para padronizar materiais e oferecer uma experiência consistente em diferentes atendimentos.</p></article>
+            <article class="audience-card"><h3>Profissionais white label</h3><p>Para lançar uma solução com seu próprio nome, identidade e relacionamento com o paciente.</p></article>
+        </div>
+        <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Provas de confiança</div><h2>Transparência no que você recebe.</h2><p>Em vez de promessas genéricas, a oferta se apoia em recursos verificáveis no próprio projeto.</p></div>
+        <div class="trust-grid">
+            <article class="trust-card"><h3>✓ Código-fonte incluído</h3><p>Você recebe os arquivos do projeto para ter autonomia sobre sua ferramenta.</p></article>
+            <article class="trust-card"><h3>✓ Demonstração funcional</h3><p>Teste o fluxo de dados, geração, histórico e compartilhamento antes de decidir.</p></article>
+            <article class="trust-card"><h3>✓ Uso multiplataforma</h3><p>A mesma aplicação funciona no navegador do computador e no celular.</p></article>
+        </div>
+        <div class="source-box" style="margin-top: 24px"><div><h3>Entrega que não prende você.</h3><p>Além do acesso ao app, o código-fonte do projeto faz parte da entrega. Assim, você pode manter uma cópia, contratar melhorias e continuar evoluindo sua operação.</p></div><a class="button button-primary" href="index.html">Ver o projeto</a></div>
+        <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Como usar</div><h2>Simples no celular. Completo no computador.</h2></div>
+        <div class="steps-grid">
+            <article class="step-card"><div class="step-number">1</div><h3>No celular</h3><p>Abra o link no Chrome ou Safari e use o menu “Adicionar à tela inicial” para criar um ícone do app.</p></article>
+            <article class="step-card"><div class="step-number">2</div><h3>No computador</h3><p>Abra o link em qualquer navegador moderno. Salve nos favoritos para acessar sempre que precisar.</p></article>
+            <article class="step-card"><div class="step-number">3</div><h3>Online e offline</h3><p>Online, o sistema carrega a versão mais atual. Depois de acessado, o histórico continua disponível no dispositivo.</p></article>
+        </div>
+        <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Perguntas frequentes</div><h2>Antes de começar, fique tranquilo.</h2></div>
+        <div class="faq">
+            <details><summary>O valor de R$ 49,90 é mensal?</summary><p>Não. Nesta oferta, o valor é apresentado como acesso ao projeto. Combine a forma de pagamento e as condições de entrega diretamente com o responsável.</p></details>
+            <details><summary>Preciso instalar um programa?</summary><p>Não. O sistema abre pelo navegador. No celular, você pode adicionar um atalho à tela inicial para ter uma experiência parecida com a de um aplicativo.</p></details>
+            <details><summary>Funciona em Android e iPhone?</summary><p>Sim. Basta usar Chrome no Android ou Safari no iPhone. O acesso também funciona em computadores com navegador moderno.</p></details>
+            <details><summary>O código-fonte está incluído?</summary><p>Sim. A entrega inclui os arquivos do projeto conforme combinado, permitindo guardar uma cópia e contratar futuras personalizações.</p></details>
+            <details><summary>Posso trocar o nome e a cor?</summary><p>Sim. O sistema já possui personalização do nome profissional e da cor principal para adaptar a experiência à sua marca.</p></details>
+            <details><summary>O WhatsApp é enviado automaticamente?</summary><p>O botão monta a mensagem do cardápio e abre o WhatsApp com o texto pronto. Você revisa e escolhe o contato antes de enviar.</p></details>
         </div>
         <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Oferta de lançamento</div><h2>Comece hoje, sem complicação.</h2><p>Um pagamento simples para colocar sua experiência de nutrição no ar e começar a atender com mais agilidade.</p></div>
         <div class="offer">
