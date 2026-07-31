@@ -49,10 +49,21 @@
         .feature-icon { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 26px; border-radius: 12px; color: var(--deep); background: var(--lime); font-size: 20px; }
         .feature h3 { margin: 0 0 10px; font-size: 19px; }
         .feature p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+        .offer { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; align-items: stretch; }
+        .offer-card { padding: 30px; border: 1px solid var(--line); border-radius: 18px; background: white; }
+        .offer-card h3 { margin: 0 0 18px; font-size: 22px; }
+        .price { margin: 8px 0 22px; color: var(--green); font-size: 48px; font-weight: 700; letter-spacing: -.06em; }
+        .price small { color: var(--muted); font-size: 14px; font-weight: 500; letter-spacing: 0; }
+        .bonus-list, .steps { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+        .bonus-list li, .steps li { display: flex; gap: 10px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+        .bonus-list li::before { content: '✓'; color: var(--green); font-weight: 700; }
+        .steps { counter-reset: step; }
+        .steps li::before { counter-increment: step; content: counter(step); display: grid; flex: 0 0 25px; place-items: center; width: 25px; height: 25px; border-radius: 50%; color: var(--deep); background: var(--lime); font-size: 12px; font-weight: 700; }
+        .offer-note { margin-top: 20px; color: var(--muted); font-size: 12px; }
         .cta { max-width: 1180px; margin: 0 auto 72px; padding: 58px 56px; border-radius: 22px; color: white; background: var(--deep); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
         .cta h2 { max-width: 600px; margin: 0; }
         footer { max-width: 1180px; margin: auto; padding: 0 28px 32px; color: var(--muted); font-size: 13px; }
-        @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .preview { max-width: 460px; margin: auto; } .features { grid-template-columns: 1fr; } .cta { align-items: flex-start; flex-direction: column; margin: 0 18px 52px; padding: 38px 26px; } }
+        @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .preview { max-width: 460px; margin: auto; } .features, .offer { grid-template-columns: 1fr; } .cta { align-items: flex-start; flex-direction: column; margin: 0 18px 52px; padding: 38px 26px; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
     </style>
 </head>
@@ -84,6 +95,38 @@
             <article class="feature"><div class="feature-icon">✦</div><h3>Sua marca no topo</h3><p>Troque “NutriIA” pelo seu nome, ajuste a cor do tema e transforme o sistema em uma extensão do seu consultório.</p></article>
             <article class="feature"><div class="feature-icon">↗</div><h3>Compartilhe em um toque</h3><p>O cardápio vira uma mensagem organizada no WhatsApp, pronta para chegar ao paciente com clareza.</p></article>
             <article class="feature"><div class="feature-icon">⌁</div><h3>Histórico sempre à mão</h3><p>Planos salvos, funcionamento offline e uma experiência simples para retomar o atendimento de onde parou.</p></article>
+        </div>
+        <div class="section-heading" style="margin-top: 92px"><div class="eyebrow" style="color: var(--green)">Oferta de lançamento</div><h2>Comece hoje, sem complicação.</h2><p>Um pagamento simples para colocar sua experiência de nutrição no ar e começar a atender com mais agilidade.</p></div>
+        <div class="offer">
+            <article class="offer-card">
+                <h3>Acesso ao NutriIA</h3>
+                <div class="price">R$ 49,90 <small>/ acesso</small></div>
+                <ul class="bonus-list">
+                    <li>Sistema de cardápios personalizados</li>
+                    <li>Nome e cor da sua marca no aplicativo</li>
+                    <li>Compartilhamento pronto para WhatsApp</li>
+                    <li>Histórico de cardápios e funcionamento offline</li>
+                    <li>Atualizações do projeto incluídas</li>
+                </ul>
+                <a class="button button-primary" style="margin-top: 26px" href="index.html">Quero começar</a>
+                <p class="offer-note">O pagamento e a entrega podem ser combinados diretamente com o responsável pelo projeto.</p>
+            </article>
+            <article class="offer-card">
+                <h3>Bônus incluídos</h3>
+                <ul class="bonus-list">
+                    <li>Guia rápido para personalizar o seu app</li>
+                    <li>Orientação para instalar no celular</li>
+                    <li>Orientação para usar pelo navegador</li>
+                    <li>Arquivo pronto para compartilhar com pacientes</li>
+                </ul>
+                <h3 style="margin-top: 30px">Como usar no celular</h3>
+                <ol class="steps">
+                    <li>Abra o link do NutriIA no Chrome ou Safari.</li>
+                    <li>Toque no menu do navegador e escolha “Adicionar à tela inicial”.</li>
+                    <li>Abra o ícone criado e use o app como um aplicativo normal.</li>
+                    <li>Para usar online, basta abrir o mesmo link quando estiver conectado.</li>
+                </ol>
+            </article>
         </div>
     </main>
     <section class="cta"><h2>Seu método merece uma experiência à altura.</h2><a class="button button-primary" href="index.html">Testar o NutriIA</a></section>
