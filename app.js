@@ -116,6 +116,16 @@ function alternarTema() {
     aplicarTema();
 }
 
+function iniciarNovoCardapio() {
+    localStorage.removeItem('ultimaDieta');
+    dietaAtualExportavel = null;
+    document.getElementById('results')?.classList.add('hidden');
+    document.getElementById('loading')?.classList.add('hidden');
+    document.getElementById('historicoSection')?.classList.add('hidden');
+    document.getElementById('formSection')?.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function salvarFormulario() {
     const dados = {
         nomeProfissional: document.getElementById('nomeProfissional').value,
@@ -529,5 +539,7 @@ function alternarHistorico(abrir = true) {
 document.getElementById('btnHistorico')?.addEventListener('click', () => alternarHistorico(true));
 document.getElementById('btnHistoricoResultados')?.addEventListener('click', () => alternarHistorico(true));
 document.getElementById('btnFecharHistorico')?.addEventListener('click', () => alternarHistorico(false));
+document.getElementById('themeToggle')?.addEventListener('click', alternarTema);
+document.getElementById('btnNovoCardapio')?.addEventListener('click', iniciarNovoCardapio);
 document.getElementById('btnWhatsApp')?.addEventListener('click', exportarWhatsApp);
 document.getElementById('btnPdf')?.addEventListener('click', exportarPdf);
