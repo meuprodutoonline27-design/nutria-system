@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NutriIA - Cardápio Inteligente</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#16a34a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { transition: background-color .2s ease, color .2s ease; }
+        body.theme-dark { background-color: #020617; color: #e2e8f0; }
+        body.theme-dark #formSection,
+        body.theme-dark #historicoSection,
+        body.theme-dark .theme-card,
+        body.theme-dark [data-theme-surface] {
+            background-color: #111827;
+            color: #f8fafc;
+            border-color: #334155;
+        }
+        body.theme-dark .theme-muted { color: #cbd5e1; }
+        body.theme-dark .theme-input {
+            background-color: #0f172a;
+            color: #f8fafc;
+            border-color: #475569;
+        }
+        body.theme-dark .theme-soft {
+            background-color: #1f2937;
+            color: #f8fafc;
+        }
+        @media print {
+            body { background: white !important; }
+            header, .no-print, #formSection, #historicoSection, #loading { display: none !important; }
+            main { max-width: none !important; padding: 0 !important; }
+            #results { display: block !important; }
+            .shadow-sm, .rounded-2xl, .rounded-xl { box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Cabeçalho -->
+    <header id="appHeader" class="bg-green-600 text-white p-4 shadow-md sticky top-0 z-50 relative">
+        <h1 id="appTitle" class="text-xl font-bold text-center"><i class="fas fa-leaf mr-2"></i>NutriIA</h1>
+        <button id="themeToggle" type="button" class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/30 bg-white/10 px-3 py-2 text-sm" aria-pressed="false" title="Alternar tema">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="max-w-md mx-auto p-4 pb-20">
+        
+        <!-- Formulário -->
+        <section id="formSection" class="bg-white p-5 rounded-2xl shadow-sm mb-6 theme-card" data-theme-surface>
+            <h2 class="text-lg font-semibold mb-4 text-green-700">Seus Dados</h2>
+            <form id="dietForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Nome do Profissional</label>
+                    <input type="text" id="nomeProfissional" placeholder="Ex: Dra. Ana Lima" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Cor do Tema</label>
+                    <input type="color" id="corTema" value="#16a34a" class="w-full h-10 p-1 border border-gray-300 rounded-lg cursor-pointer theme-input">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Peso (kg)</label>
+                        <input type="number" id="peso" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Altura (cm)</label>
+                        <input type="number" id="altura" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Idade</label>
+                    <input type="number" id="idade" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                </div>
+
+                <div class="rounded-lg bg-green-50 p-3 text-sm text-green-800">
+                    <div class="flex items-center justify-between">
+                        <span class="font-medium">TMB estimada</span>
+                        <strong id="tmbValue">— kcal/dia</strong>
+                    </div>
+                    <p class="text-xs text-green-700 mt-1">Calculada automaticamente com base no peso, altura e idade.</p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Objetivo</label>
+                    <select id="objetivo" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                        <option value="Emagrecimento">Emagrecimento</option>
+                        <option value="Ganho de Massa">Ganho de Massa</option>
+                        <option value="Manutenção">Manutenção de Peso</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-2">Restrições</label>
+                    <div class="flex flex-wrap gap-2">
+                        <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full text-sm"><input type="checkbox" value="Sem Lactose" class="restricao"><span>Sem Lactose</span></label>
+                        <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full text-sm"><input type="checkbox" value="Sem Glúten" class="restricao"><span>Sem Glúten</span></label>
+                        <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full text-sm"><input type="checkbox" value="Vegano" class="restricao"><span>Vegano</span></label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1">Orçamento Semanal (R$)</label>
+                    <input type="number" id="orcamento" placeholder="Ex: 150" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none theme-input">
+                </div>
+
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center">
+                    <i class="fas fa-magic mr-2"></i> Gerar Cardápio da Semana
+                </button>
+
+                <button type="button" id="btnHistorico" class="w-full border border-gray-300 text-gray-700 font-medium py-2 rounded-xl mt-2 flex items-center justify-center">
+                    <i class="fas fa-history mr-2"></i> Ver histórico
+                </button>
+            </form>
+        </section>
+
+        <section id="historicoSection" class="hidden bg-white p-4 rounded-2xl shadow-sm mb-6 theme-card" data-theme-surface>
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-lg font-bold text-green-700 flex items-center"><i class="fas fa-clock-rotate-left mr-2"></i> Históricos</h3>
+                <button type="button" id="btnFecharHistorico" class="text-sm text-gray-500">Fechar</button>
+            </div>
+            <div id="historicoContainer" class="space-y-3"></div>
+        </section>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden text-center py-10">
+            <i class="fas fa-circle-notch fa-spin text-4xl text-green-600 mb-3"></i>
+            <p class="text-gray-600">A IA está montando seu cardápio...</p>
+        </div>
+
+        <!-- Resultados -->
+        <div id="results" class="hidden space-y-6">
+            <div id="statusBanner" class="hidden rounded-xl border border-yellow-200 bg-yellow-50 p-3 text-sm text-yellow-800"></div>
+
+            <section class="bg-white p-4 rounded-2xl shadow-sm theme-card" data-theme-surface>
+                <h3 class="text-lg font-bold text-green-700 mb-3 flex items-center"><i class="fas fa-calendar-alt mr-2"></i> Cardápio Semanal</h3>
+                <div id="metaCalorica" class="mb-4 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-800"></div>
+                <div id="menuContainer" class="space-y-3"></div>
+            </section>
+
+            <section class="bg-white p-4 rounded-2xl shadow-sm border-2 border-green-100 theme-card" data-theme-surface>
+                <h3 class="text-lg font-bold text-green-700 mb-3 flex items-center"><i class="fas fa-shopping-cart mr-2"></i> Lista de Compras</h3>
+                <div id="shoppingContainer" class="space-y-4"></div>
+                <div class="mt-4 grid grid-cols-1 gap-2 no-print">
+                    <button type="button" id="btnWhatsApp" class="w-full bg-green-600 text-white py-2 rounded-lg text-sm"><i class="fab fa-whatsapp mr-2"></i>Enviar por WhatsApp</button>
+                    <button type="button" id="btnPdf" class="w-full bg-gray-800 text-white py-2 rounded-lg text-sm"><i class="fas fa-file-pdf mr-2"></i>Baixar PDF</button>
+                </div>
+            </section>
+
+            <button type="button" id="btnHistoricoResultados" class="w-full border border-gray-300 text-gray-700 font-medium py-2 rounded-xl mt-2 flex items-center justify-center no-print">
+                <i class="fas fa-history mr-2"></i> Ver histórico
+            </button>
+            
+            <button onclick="location.reload()" class="w-full text-gray-500 text-sm py-2">Gerar novo cardápio</button>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+    
+    <!-- ✅ SERVICE WORKER -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js')
+                .then(reg => console.log('✅ Service Worker registrado!'))
+                .catch(err => console.error('❌ Erro:', err));
+        }
+    </script>
+</body>
+</html>
