@@ -34,12 +34,21 @@ function gerarDietaLocal(dados) {
     const restricoesTexto = dados.restricoes || 'Nenhuma';
     const orcamento = Number(dados.orcamento) || 150;
     const tmb = calcularTmb(dados);
+    const lanches = [
+        'Banana com castanhas',
+        'Iogurte natural com aveia',
+        'Maçã com pasta de amendoim',
+        'Torrada integral com queijo branco',
+        'Vitamina de mamão com aveia',
+        'Uvas com castanhas',
+        'Ovo cozido com fruta'
+    ];
 
     const cardapio = dias.map((dia, index) => ({
         dia,
         cafe: index % 2 === 0 ? 'Pão integral com fruta e iogurte' : 'Vitamina de banana com aveia',
         almoco: index % 2 === 0 ? 'Arroz, feijão, frango grelhado e salada' : 'Torrada de pão integral com ovo e salada',
-        lanche: 'Banana ou maçã com castanhas',
+        lanche: lanches[index],
         jantar: index % 2 === 0 ? 'Tigela de legumes com proteína' : 'Omelete com salada'
     }));
 
@@ -57,6 +66,42 @@ function gerarDietaLocal(dados) {
         tmb,
         mensagem: `Cardápio local gerado para ${objetivo.toLowerCase()} com TMB estimada de ${tmb ? `${tmb} kcal/dia` : '—'} e orçamento de R$ ${orcamento}.`
     };
+}
+
+function garantirLanchesVariados(dieta) {
+    if (!Array.isArray(dieta?.cardapio)) return dieta;
+
+    const alternativas = [
+        'Banana com castanhas',
+        'Iogurte natural com aveia',
+        'Maçã com pasta de amendoim',
+        'Torrada integral com queijo branco',
+        'Vitamina de mamão com aveia',
+        'Uvas com castanhas',
+        'Ovo cozido com fruta'
+    ];
+    const usados = new Set();
+    let alternativaIndex = 0;
+
+    dieta.cardapio.forEach(item => {
+        const lancheAtual = String(item.lanche || '').trim();
+        if (lancheAtual && !usados.has(lancheAtual)) {
+            usados.add(lancheAtual);
+            return;
+        }
+
+        while (alternativaIndex < alternativas.length && usados.has(alternativas[alternativaIndex])) {
+            alternativaIndex += 1;
+        }
+
+        if (alternativaIndex < alternativas.length) {
+            item.lanche = alternativas[alternativaIndex];
+            usados.add(item.lanche);
+            alternativaIndex += 1;
+        }
+    });
+
+    return dieta;
 }
 
 // ========================================
@@ -331,6 +376,7 @@ document.getElementById('dietForm').addEventListener('submit', async (e) => {
     }
 
     dieta.tmb = dieta.tmb ?? dados.tmb ?? calcularTmb(dados);
+    garantirLanchesVariados(dieta);
     definirDietaAtual(dieta);
     salvarNoHistorico(dieta);
 
