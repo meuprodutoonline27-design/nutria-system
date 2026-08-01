@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0e6b3d">
+    <title>Entrega NutriIA | Seu acesso</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --green: #0e6b3d; --deep: #092d20; --lime: #b7e27d; --paper: #f5f7f1; --ink: #163328; --muted: #698077; --line: #dce8de; }
+        * { box-sizing: border-box; }
+        body { margin: 0; color: var(--ink); background: var(--paper); font-family: 'DM Sans', sans-serif; }
+        a { color: inherit; text-decoration: none; }
+        .wrap { width: min(100% - 40px, 920px); margin: auto; }
+        header { padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,.16); color: white; background: var(--deep); }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.04em; font-size: 20px; }
+        .mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; color: var(--deep); background: var(--lime); }
+        .hero { padding: 66px 0 54px; color: white; background: linear-gradient(135deg, var(--deep), var(--green)); }
+        .eyebrow { color: var(--lime); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+        h1, h2 { font-family: 'Playfair Display', serif; letter-spacing: -.04em; line-height: 1.05; }
+        h1 { max-width: 680px; margin: 16px 0; font-size: clamp(42px, 7vw, 68px); }
+        h2 { margin: 0 0 12px; font-size: 30px; }
+        .hero p { max-width: 650px; margin: 0; color: #d8eadc; line-height: 1.65; font-size: 17px; }
+        main { padding: 42px 0 70px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+        .card { padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: 0 12px 30px rgba(29,77,51,.06); }
+        .card-wide { grid-column: 1 / -1; }
+        .card p { color: var(--muted); line-height: 1.6; font-size: 14px; }
+        .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; margin-top: 12px; padding: 0 18px; border-radius: 11px; color: var(--deep); background: var(--lime); font-weight: 700; transition: transform .2s ease, box-shadow .2s ease; }
+        .button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(14,107,61,.15); }
+        .button-secondary { color: var(--green); border: 1px solid var(--line); background: #f5fbf3; }
+        ul, ol { display: grid; gap: 12px; margin: 18px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 14px; line-height: 1.5; }
+        li { display: flex; gap: 9px; }
+        ul li::before { content: '✓'; color: var(--green); font-weight: 700; }
+        ol { counter-reset: item; }
+        ol li::before { counter-increment: item; content: counter(item); display: grid; flex: 0 0 24px; place-items: center; width: 24px; height: 24px; border-radius: 50%; color: var(--deep); background: var(--lime); font-size: 12px; font-weight: 700; }
+        .notice { padding: 18px; border-left: 4px solid var(--green); border-radius: 10px; background: #eaf5e9; color: var(--muted); font-size: 14px; line-height: 1.6; }
+        code { padding: 3px 6px; border-radius: 5px; color: var(--green); background: #edf6ed; font-size: 13px; }
+        footer { padding: 0 0 32px; color: var(--muted); text-align: center; font-size: 12px; }
+        @media (max-width: 680px) { .wrap { width: min(100% - 28px, 920px); } .grid { grid-template-columns: 1fr; } .card-wide { grid-column: auto; } }
+    </style>
+</head>
+<body>
+    <header><div class="wrap"><div class="brand"><span class="mark">✦</span> NutriIA <span style="color:#9fc8aa;font-size:13px;font-weight:500">| Entrega</span></div></div></header>
+    <section class="hero"><div class="wrap"><div class="eyebrow">Compra confirmada</div><h1>Seu NutriIA está pronto para começar.</h1><p>Esta é a sua central de entrega. Acesse o aplicativo, baixe o código-fonte e siga o passo a passo para personalizar sua experiência.</p></div></section>
+    <main class="wrap">
+        <div class="grid">
+            <article class="card"><h2>1. Abrir o aplicativo</h2><p>Use o sistema diretamente pelo navegador. No celular, você pode adicionar um ícone à tela inicial.</p><a class="button" href="index.html">Abrir o NutriIA</a></article>
+            <article class="card"><h2>2. Baixar o projeto</h2><p>O código-fonte está disponível no repositório do projeto. Baixe como ZIP pelo botão “Code” e “Download ZIP”.</p><a class="button button-secondary" href="https://github.com/meuprodutoonline27-design/nutria-system" target="_blank" rel="noopener">Baixar código-fonte</a></article>
+            <article class="card"><h2>Personalização inicial</h2><ul><li>Digite o nome do profissional no campo de marca.</li><li>Escolha a cor principal do aplicativo.</li><li>Preencha os dados do paciente.</li><li>Gere e revise o cardápio antes de enviar.</li></ul></article>
+            <article class="card"><h2>Como instalar no celular</h2><ol><li>Abra o link no Chrome ou Safari.</li><li>Abra o menu do navegador.</li><li>Escolha “Adicionar à tela inicial”.</li><li>Use o novo ícone como um app.</li></ol></article>
+            <article class="card card-wide"><h2>Como usar no computador</h2><p>Abra o link do NutriIA em um navegador moderno, como Chrome, Edge, Firefox ou Safari. Para facilitar o acesso, salve a página nos favoritos. O mesmo projeto funciona online no computador e no celular.</p><div class="notice">Guarde uma cópia do código-fonte em um local seguro. Para alterações técnicas, publique os arquivos em um serviço de hospedagem ou utilize o repositório do GitHub.</div></article>
+            <article class="card card-wide"><h2>Materiais incluídos nesta entrega</h2><ul><li>Aplicativo NutriIA com personalização white label.</li><li>Página de vendas do sistema.</li><li>Fonte completa do projeto em HTML, JavaScript e manifest.</li><li>Histórico, tema escuro, compartilhamento por WhatsApp e suporte offline do navegador.</li></ul></article>
+        </div>
+    </main>
+    <footer><div class="wrap">NutriIA · Entrega digital do projeto · <a href="venda.html">Ver página de vendas</a></div></footer>
+</body>
+</html>
