@@ -99,6 +99,11 @@
         body.theme-dark .bg-green-50 { background-color: #123322 !important; }
         body.theme-dark .text-green-800,
         body.theme-dark .text-green-700 { color: #bbf7d0 !important; }
+        .app-footer { padding: 1.5rem 1rem 2rem; color: #94a3a0; text-align: center; font-size: .7rem; }
+        .app-footer a { color: #5f8b6b; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
+        .app-footer a:hover { color: var(--brand); }
+        body.theme-dark .app-footer { color: #64748b; }
+        body.theme-dark .app-footer a { color: #86efac; }
         @media print {
             body { background: white !important; }
             header, .no-print, #formSection, #historicoSection, #loading { display: none !important; }
@@ -240,6 +245,10 @@
         </div>
 
     </main>
+
+    <footer class="app-footer">
+        <span>NutriIA · </span><a href="venda.html">Conheça o sistema</a>
+    </footer>
 
     <script src="app.js"></script>
     
